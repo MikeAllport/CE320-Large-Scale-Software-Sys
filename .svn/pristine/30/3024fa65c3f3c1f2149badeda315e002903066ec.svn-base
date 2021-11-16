@@ -1,0 +1,167 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class CollageMakerApplication extends JFrame {
+
+    public CollageMakerApplication(){
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1400, 800);
+        setVisible(true);
+        Homepage homepage = new Homepage(this);
+        setDisplay(homepage);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDisplay(JPanel homepage_panel){
+        getContentPane().removeAll();
+        add(homepage_panel);
+        validate();
+        repaint();
+    }
+
+    public static void main(String[] args){
+        new CollageMakerApplication();
+    }
+}
+
+//Homepage
+class Homepage extends JPanel{
+    CollageMakerApplication theApp;
+
+    Homepage(CollageMakerApplication theApp){
+        this.theApp=theApp;
+
+        JButton load_image_btn = new JButton("LOAD IMAGE");
+        JButton generate_btn = new JButton("GENERATE");
+        JButton delete_image_btn = new JButton("DELETE IMAGE");
+        JButton help_homepage_btn = new JButton("HELP");
+        JButton customise_collage_btn = new JButton("CUSTOMISE (FUTURE ITERATIONS)");
+
+        add(load_image_btn);
+        add(delete_image_btn);
+        add(generate_btn);
+        add(customise_collage_btn);
+        add(help_homepage_btn);
+
+        load_image_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL RUN FILE-EXPLORER TO LOAD IMAGE(S)");
+            }
+        });
+
+        delete_image_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL DELETE IMAGE");
+            }
+        });
+
+        help_homepage_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL SHOW BRIEF INSTRUCTIONS ON HOMEPAGE");
+
+            }
+        });
+
+        customise_collage_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL ALLOW USER TO CUSTOMISE A COLLAGE FROM SCRATCH - FOR FUTURE ITERATIONS");
+            }
+        });
+
+        generate_btn.addActionListener(new generate_btn_handler());
+    }
+
+    class generate_btn_handler implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CollagePreview_Page collagepreview_page = new CollagePreview_Page();
+            theApp.setDisplay(collagepreview_page);
+            System.out.println("CODE WILL GENERATE A COLLAGE BASED ON THE IMAGES THAT ARE LOADED AND GO TO THE NEXT PAGE TO PREVIEW 4-5 COLLAGES");
+        }
+    }
+}
+
+//Collage Selector Screen
+class CollagePreview_Page extends JPanel{
+
+   // CollageMakerApplication theApp;
+
+    CollagePreview_Page(/*CollageMakerApplication theApp*/){
+        //this.theApp=theApp;
+
+        JButton customise_collage_preview_btn = new JButton("CUSTOMISE (FUTURE ITERATIONS)");
+        JButton back_to_homepage_btn = new JButton("BACK TO HOMEPAGE");
+        JButton previous_collage_btn = new JButton("PREVIOUS");
+        JButton next_collage_btn = new JButton("NEXT");
+        JButton save_collage_btn = new JButton("SAVE COLLAGE");
+        JButton help_collage_preview_btn = new JButton("HELP");
+
+        add(customise_collage_preview_btn);
+        add(back_to_homepage_btn);
+        add(previous_collage_btn);
+        add(save_collage_btn);
+        add(next_collage_btn);
+        add(help_collage_preview_btn);
+
+        customise_collage_preview_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL ALLOW USER TO CUSTOMISE A GENERATED COLLAGE - FOR FUTURE ITERATIONS");
+            }
+        });
+
+        back_to_homepage_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CollageMakerApplication collageMakerApplication = new CollageMakerApplication();
+                //theApp.setDisplay(collageMakerApplication);
+                System.out.println("CODE WILL RETURN TO HOMEPAGE");
+            }
+        });
+
+        previous_collage_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL CYCLE TO PREVIOUS COLLAGE");
+            }
+        });
+
+        save_collage_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE SHOULD RUN FILE-EXPLORER TO SAVE GENERATED COLLAGE ");
+            }
+        });
+
+        next_collage_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL CYCLE TO NEXT COLLAGE");
+            }
+        });
+
+        help_collage_preview_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL SHOW BRIEF INSTRUCTIONS FOR COLLAGE PREVIEW PAGE");
+            }
+        });
+    }
+}

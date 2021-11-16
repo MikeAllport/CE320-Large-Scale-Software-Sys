@@ -1,0 +1,53 @@
+package group9.button_handling;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import group9.CollageMakerApplication;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+public class LoadImageButtonHandler implements ActionListener
+{
+    private CollageMakerApplication theApp;
+
+    public LoadImageButtonHandler(CollageMakerApplication theApp)
+    {
+        this.theApp = theApp;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JFileChooser c = new JFileChooser(".");
+        c.setMultiSelectionEnabled(true); //allow multiple files
+        c.showOpenDialog(theApp);
+        //retrieve files selected by the user
+        File[] files = c.getSelectedFiles(); //get files loaded
+        for (File f : files) {
+            BufferedImage image = null;
+            try {
+                image = ImageIO.read(f);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            theApp.images.add(image);  //save images in list
+        }
+        FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes()); //get all image file filters
+        c.setFileFilter(imageFilter); //setting file filter
+        // Demonstrate "Open" dialog:
+        int rVal = c.showOpenDialog(theApp);
+        if (rVal == JFileChooser.APPROVE_OPTION) { //user approves
+//            super.filename.setText(c.getSelectedFile().getName());
+//            dir.setText(c.getCurrentDirectory().toString());
+        }
+        if (rVal == JFileChooser.CANCEL_OPTION) { //user cancels
+//            filename.setText("User has cancelled.");
+//            dir.setText("Default Directory");
+        }
+    }
+}

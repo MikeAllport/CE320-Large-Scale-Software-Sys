@@ -1,0 +1,37 @@
+import javax.swing.*;
+
+//Homepage
+class Homepage extends JPanel
+{
+    CollageMakerApplication theApp;
+
+    Homepage(CollageMakerApplication theApp) {
+        this.theApp = theApp;
+        this.setLayout(null);
+
+        JButton load_image_btn = new JButton("LOAD IMAGE");
+        JButton generate_btn = new JButton("GENERATE");
+        JButton delete_image_btn = new JButton("DELETE IMAGE");
+        JButton help_homepage_btn = new JButton("HELP");
+        JButton customise_collage_btn = new JButton("CUSTOMISE (FUTURE ITERATIONS)");
+
+        load_image_btn.setBounds(20, 20, 200, 50);
+        delete_image_btn.setBounds(240, 20, 200, 50);
+        generate_btn.setBounds(600, 700,  200, 50);
+        customise_collage_btn.setBounds(830, 700, 200, 50);
+        help_homepage_btn.setBounds(theApp.getWidth()-150, 20, 100, 50);
+
+        add(load_image_btn);
+        add(delete_image_btn);
+        add(generate_btn);
+        add(customise_collage_btn);
+        add(help_homepage_btn);
+
+        load_image_btn.addActionListener(new ButtonHandler("loadImage", theApp));
+        delete_image_btn.addActionListener(new ButtonHandler("deleteImage", theApp));
+        help_homepage_btn.addActionListener(new ButtonHandler("help", theApp));
+        customise_collage_btn.addActionListener(new ButtonHandler("customiseCollage", theApp));
+        generate_btn.addActionListener(new ButtonHandler("generateCollage", theApp));
+    }
+
+}

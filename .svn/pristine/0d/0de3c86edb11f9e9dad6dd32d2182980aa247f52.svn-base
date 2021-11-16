@@ -1,0 +1,25 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+public class CollageGenerator {
+    BufferedImage collage = new BufferedImage(256,512,BufferedImage.TYPE_INT_RGB);
+
+    //combines images in resources into a single "collage" image saved in resources. Just a test
+    public CollageGenerator() throws IOException {
+        BufferedImage img1 = ImageIO.read(new File("trunk/resources/puppy.jpg"));
+        BufferedImage img2 = ImageIO.read(new File("trunk/resources/dog.jpg"));
+        Graphics2D g2d = collage.createGraphics();
+        g2d.drawImage(img1,0,0,null);
+        g2d.drawImage(img2,0,256,null);
+        g2d.dispose();
+        File file = new File("trunk/resources/collage.jpg");
+        ImageIO.write(collage, "jpg", file);
+    }
+
+    public static void main(String[] args) throws IOException {
+        new CollageGenerator();
+    }
+}

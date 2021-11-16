@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="53a7017a-e740-4ef5-b7f7-763bcce52a1e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="JUnit4 Test Class" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jVBJIuvmt3ernciNTTI4kqhWKc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../labs/lab4 - date class - manual testing/BankClass/Manual Unit Testing/Original Code/BankAccount.java" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\M drive\Third Year\CE320_Large_scale_software_sys\team_project\trunk\src\group9\RandomCollageGenerator" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Piccollage">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Piccollage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="group9.Piccollage" />
+      <module name="team_project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="group9.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="team_project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <module name="team_project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ImageTesting" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="group9.UnitTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="group9.UnitTests" />
+      <option name="MAIN_CLASS_NAME" value="group9.UnitTests.ImageTesting" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PiccollageTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="group9.UnitTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="group9.UnitTests" />
+      <option name="MAIN_CLASS_NAME" value="group9.UnitTests.PiccollageTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrevNextCollageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="group9.UnitTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="group9.UnitTests" />
+      <option name="MAIN_CLASS_NAME" value="group9.UnitTests.PrevNextCollageTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.Piccollage" />
+      <item itemvalue="Application.Test" />
+      <item itemvalue="JUnit.PiccollageTests" />
+      <item itemvalue="JUnit.ImageTesting" />
+      <item itemvalue="JUnit.PrevNextCollageTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Piccollage" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="JUnit.PiccollageTests" />
+        <item itemvalue="JUnit.PrevNextCollageTest" />
+        <item itemvalue="JUnit.ImageTesting" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\m_all\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="53a7017a-e740-4ef5-b7f7-763bcce52a1e" name="Default Changelist" comment="" />
+      <created>1603879306778</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603879306778</updated>
+      <workItem from="1603879308858" duration="1914000" />
+      <workItem from="1603882742977" duration="607000" />
+      <workItem from="1603901243209" duration="26000" />
+      <workItem from="1604323284916" duration="3003000" />
+      <workItem from="1604488071275" duration="14000" />
+      <workItem from="1604927300051" duration="2767000" />
+      <workItem from="1604944187529" duration="649000" />
+      <workItem from="1604985509139" duration="206000" />
+      <workItem from="1604992726354" duration="73000" />
+      <workItem from="1605622415282" duration="11092000" />
+      <workItem from="1605634156983" duration="1123000" />
+      <workItem from="1605694647072" duration="2927000" />
+      <workItem from="1605699501768" duration="302000" />
+      <workItem from="1605700821458" duration="425000" />
+      <workItem from="1605701872142" duration="18913000" />
+      <workItem from="1605739496544" duration="9011000" />
+      <workItem from="1605793264614" duration="4854000" />
+      <workItem from="1605798405032" duration="5537000" />
+      <workItem from="1605828096819" duration="1136000" />
+      <workItem from="1605875443785" duration="3447000" />
+      <workItem from="1605891429570" duration="2869000" />
+      <workItem from="1606011744381" duration="605000" />
+      <workItem from="1606062876928" duration="6000" />
+      <workItem from="1606108375291" duration="10975000" />
+      <workItem from="1606139957054" duration="3809000" />
+      <workItem from="1606181977594" duration="13108000" />
+      <workItem from="1606260999860" duration="476000" />
+      <workItem from="1606298153277" duration="990000" />
+      <workItem from="1607349481281" duration="3588000" />
+      <workItem from="1607367504109" duration="1433000" />
+      <workItem from="1607417015282" duration="1231000" />
+      <workItem from="1607432935721" duration="1717000" />
+      <workItem from="1607450174754" duration="74000" />
+      <workItem from="1607505337663" duration="8368000" />
+      <workItem from="1607697171487" duration="11440000" />
+      <workItem from="1607891760695" duration="8280000" />
+      <workItem from="1607951112990" duration="7184000" />
+      <workItem from="1607961977487" duration="1949000" />
+      <workItem from="1608027548089" duration="1281000" />
+      <workItem from="1608110184508" duration="4819000" />
+      <workItem from="1608150370148" duration="2986000" />
+      <workItem from="1608212804953" duration="6500000" />
+      <workItem from="1609870891120" duration="25000" />
+      <workItem from="1611001491331" duration="1385000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/RandomCollageGenerator/Bounds.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/RandomCollageGenerator/CollageGeneratorBinaryTree.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/UnitTests/PrevNextCollageTest.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/UnitTests/PrevNextCollageTest.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/CollageWindow/ColorComboListener.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/CollageWindow/ColorComboListener.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/CollageWindow/Colors.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/CollageWindow/Colors.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/trunk/src/group9/Piccollage.java</url>
+          <line>157</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="child.rightChild" language="JAVA" />
+        <watch expression="child.rightChild" language="JAVA" />
+        <watch expression="child.rightChild" language="JAVA" />
+        <watch expression="child.rightChild" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

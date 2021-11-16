@@ -1,0 +1,102 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+//Homepage
+class Homepage extends JPanel
+{
+    CollageMakerApplication theApp;
+
+    Homepage(CollageMakerApplication theApp) {
+        this.theApp = theApp;
+
+        JButton load_image_btn = new JButton("LOAD IMAGE");
+        JButton generate_btn = new JButton("GENERATE");
+        JButton delete_image_btn = new JButton("DELETE IMAGE");
+        JButton help_homepage_btn = new JButton("HELP");
+        JButton customise_collage_btn = new JButton("CUSTOMISE (FUTURE ITERATIONS)");
+
+        add(load_image_btn);
+        add(delete_image_btn);
+        add(generate_btn);
+        add(customise_collage_btn);
+        add(help_homepage_btn);
+
+        load_image_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser c = new JFileChooser(".");
+                c.setMultiSelectionEnabled(true); //allow multiple files
+                c.showOpenDialog(theApp);
+                //retrieve files selected by the user
+                File[] files = c.getSelectedFiles(); //get files loaded
+                for (File f : files) {
+                    BufferedImage image = null;
+                    try {
+                        image = ImageIO.read(f);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    theApp.images.add(image);  //save images in list
+                }
+                FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes()); //get all image file filters
+                c.setFileFilter(imageFilter); //setting file filter
+                // Demonstrate "Open" dialog:
+                int rVal = c.showOpenDialog(theApp);
+                if (rVal == JFileChooser.APPROVE_OPTION) { //user approves
+//            super.filename.setText(c.getSelectedFile().getName());
+//            dir.setText(c.getCurrentDirectory().toString());
+                }
+                if (rVal == JFileChooser.CANCEL_OPTION) { //user cancels
+//            filename.setText("User has cancelled.");
+//            dir.setText("Default Directory");
+                }
+            }
+            });
+
+        delete_image_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL DELETE IMAGE");
+            }
+        });
+
+        help_homepage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL SHOW BRIEF INSTRUCTIONS ON HOMEPAGE");
+
+            }
+        });
+
+        customise_collage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL ALLOW USER TO CUSTOMISE A COLLAGE FROM SCRATCH - FOR FUTURE ITERATIONS");
+            }
+        });
+
+        generate_btn.addActionListener(new generate_btn_handler());
+
+
+    }
+
+    class generate_btn_handler implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CollagePreview_Page collagepreview_page = new CollagePreview_Page();
+            theApp.setDisplay(collagepreview_page);
+            System.out.println("CODE WILL GENERATE A COLLAGE BASED ON THE IMAGES THAT ARE LOADED AND GO TO THE NEXT PAGE TO PREVIEW 4-5 COLLAGES");
+        }
+    }
+}

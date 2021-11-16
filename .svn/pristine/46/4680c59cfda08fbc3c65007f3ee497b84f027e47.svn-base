@@ -1,0 +1,124 @@
+package group9;
+
+import group9.button_handling.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+
+// group9.CollagePreview
+public class CollagePreview_Page extends JPanel
+{
+    // group9.CollageMakerApplication theApp;
+
+    public CollagePreview_Page(/*group9.CollageMakerApplication theApp*/) throws IOException {
+        //this.theApp=theApp;
+
+        setLayout(new BorderLayout());
+
+        JPanel topButtonBar = new JPanel(new GridLayout(1, 2));
+        JPanel botButtonBar= new JPanel(new GridLayout(1, 2));
+
+        JPanel topLeftBtns = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel topRightBtns = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        JPanel botLeftBtns = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel botRightBtns = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        JPanel placeholderArea = new JPanel(new BorderLayout());
+
+        topButtonBar.add(topLeftBtns);
+        topButtonBar.add(topRightBtns);
+
+        botButtonBar.add(botLeftBtns);
+        botButtonBar.add(botRightBtns);
+
+        BufferedImage placeholderImage = ImageIO.read(new File("trunk/resources/testCollages/generated_collage.jpg"));
+        JLabel placeholderImageArea = new JLabel(new ImageIcon(placeholderImage));
+
+        //back to homepage button including resizing icon image to fit button
+        JButton back_to_homepage_btn = new JButton();
+        ImageIcon homeButtonImage = new ImageIcon("trunk\\resources\\icons\\home_image_button.png");
+        Image resizingHomeButtonImage = homeButtonImage.getImage().getScaledInstance(67,67,Image.SCALE_SMOOTH);
+        ImageIcon resizedHomeButtonImage = new ImageIcon(resizingHomeButtonImage);
+        back_to_homepage_btn.setIcon(resizedHomeButtonImage);
+        back_to_homepage_btn.setPreferredSize(new Dimension(75, 75));
+        back_to_homepage_btn.setBorder(null);
+
+        //previous button including resizing icon image to fit button
+        JButton previous_collage_btn = new JButton();
+        ImageIcon previousButtonImage = new ImageIcon("trunk\\resources\\icons\\previous_image_button.png");
+        Image resizingPreviousButtonImage = previousButtonImage.getImage().getScaledInstance(75,75,Image.SCALE_SMOOTH);
+        ImageIcon resizedPreviousButtonImage = new ImageIcon(resizingPreviousButtonImage);
+        previous_collage_btn.setIcon(resizedPreviousButtonImage);
+        previous_collage_btn.setPreferredSize(new Dimension(75, 75));
+        previous_collage_btn.setBorder(null);
+
+        //next button including resizing icon image to fit button
+        JButton next_collage_btn = new JButton();
+        ImageIcon nextButtonImage = new ImageIcon("trunk\\resources\\icons\\next_image_button.png");
+        Image resizingNextButtonImage = nextButtonImage.getImage().getScaledInstance(75,75,Image.SCALE_SMOOTH);
+        ImageIcon resizedNextButtonImage = new ImageIcon(resizingNextButtonImage);
+        next_collage_btn.setIcon(resizedNextButtonImage);
+        next_collage_btn.setPreferredSize(new Dimension(75, 75));
+        next_collage_btn.setBorder(null);
+
+        //help collage preview page button including resizing icon image to fit button
+        JButton help_collage_preview_btn = new JButton();
+        ImageIcon helpButtonImage = new ImageIcon("trunk\\resources\\icons\\help_icon_button.png");
+        Image resizingHelpButtonImage = helpButtonImage.getImage().getScaledInstance(75,75,Image.SCALE_SMOOTH);
+        ImageIcon resizedHelpButtonImage = new ImageIcon(resizingHelpButtonImage);
+        help_collage_preview_btn.setIcon(resizedHelpButtonImage);
+        help_collage_preview_btn.setPreferredSize(new Dimension(75, 75));
+        help_collage_preview_btn.setBorder(null);
+
+        //delete collage button including resizing icon image to fit button
+        JButton discard_collage_btn = new JButton();
+        ImageIcon deleteCollageImage = new ImageIcon("trunk\\resources\\icons\\delete_button.png");
+        Image resizingDeleteCollageImage = deleteCollageImage.getImage().getScaledInstance(67,67,Image.SCALE_SMOOTH);
+        ImageIcon resizedDeleteCollageImage = new ImageIcon(resizingDeleteCollageImage);
+        discard_collage_btn.setIcon(resizedDeleteCollageImage);
+        discard_collage_btn.setPreferredSize(new Dimension(75, 75));
+        discard_collage_btn.setBorder(null);
+
+        //save collage button including resizing icon image to fit button
+        JButton save_collage_btn = new JButton();
+        ImageIcon saveCollageImage = new ImageIcon("trunk\\resources\\icons\\save_collage_button.jfif");
+        Image resizingSaveCollageImage = saveCollageImage.getImage().getScaledInstance(67,67,Image.SCALE_SMOOTH);
+        ImageIcon resizedSaveCollageImage = new ImageIcon(resizingSaveCollageImage);
+        save_collage_btn.setIcon(resizedSaveCollageImage);
+        save_collage_btn.setPreferredSize(new Dimension(75, 75));
+        save_collage_btn.setBorder(null);
+
+        topLeftBtns.add(previous_collage_btn);
+        topLeftBtns.add(next_collage_btn);
+        topRightBtns.add(help_collage_preview_btn);
+
+        botLeftBtns.add(back_to_homepage_btn);
+        botRightBtns.add(discard_collage_btn);
+        botRightBtns.add(save_collage_btn);
+
+        placeholderArea.add(placeholderImageArea);
+
+        add(topButtonBar, BorderLayout.NORTH);
+        add(placeholderArea, BorderLayout.CENTER);
+        add(botButtonBar, BorderLayout.SOUTH);
+
+
+        back_to_homepage_btn.addActionListener(new BackToHomepageButtonHandler());
+        previous_collage_btn.addActionListener(new PreviousCollageButtonHandler());
+        save_collage_btn.addActionListener(new SaveCollageButtonHandler(placeholderImage));
+        next_collage_btn.addActionListener(new NextCollageButtonHandler());
+
+        //help button functionality
+        help_collage_preview_btn.addActionListener(new HelpButtonHandler(null));
+        discard_collage_btn.addActionListener(new DiscardCollageButtonHandler());
+    }
+}

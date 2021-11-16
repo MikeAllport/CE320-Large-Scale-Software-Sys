@@ -1,0 +1,47 @@
+package group9.RandomCollageGenerator;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+public class BinaryTreeNodeBufferedImage {
+    Bounds bounds;
+    BufferedImage image;
+    BinaryTreeNodeBufferedImage leftChild, rightChild;
+
+    BinaryTreeNodeBufferedImage(BufferedImage image, Bounds bounds)
+    {
+        this.bounds = bounds;
+        this.image = image;
+    }
+
+    public ArrayList<BufferedImageWithBounds> getImages()
+    {
+        ArrayList<BufferedImageWithBounds> images = new ArrayList<>();
+        images.addAll(getImagesRecursive());
+        return images;
+    }
+
+    private ArrayList<BufferedImageWithBounds> getImagesRecursive()
+    {
+        ArrayList<BufferedImageWithBounds> images = new ArrayList<>();
+        if (leftChild == null && rightChild == null) {
+            BufferedImageWithBounds collageImage = new BufferedImageWithBounds(this.image, this.bounds);
+            images.add(collageImage);
+            return images;
+        }
+        images.addAll(leftChild.getImagesRecursive());
+        images.addAll(rightChild.getImagesRecursive());
+        return images;
+    }
+
+    boolean isOverlapNormalized(Point point)
+    {
+        return this.bounds.isOverlapNormalized(point.getX(), point.getY(), bounds.getSize());
+    }
+
+    boolean hasData()
+    {
+        return image != null;
+    }
+}

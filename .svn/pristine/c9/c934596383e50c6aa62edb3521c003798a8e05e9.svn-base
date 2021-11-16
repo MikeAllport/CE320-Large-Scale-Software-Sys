@@ -1,0 +1,60 @@
+//test class for converting images to black and white - authors: Hiraj and Sumayya
+
+package group9.Testing;
+
+import javax.imageio.ImageIO;
+import java.awt.color.ColorSpace;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ColorConvertOp;
+import java.io.File;
+import java.io.IOException;
+
+public class ConversionToBlackAndWhite {
+
+    public BufferedImage inputImage,convertedImage;
+
+    public static void main (String[] args) {
+        new ConversionToBlackAndWhite();
+    }
+
+    public ConversionToBlackAndWhite() { //runs methods in order
+        getImage();
+        imageColourConversion();
+        outputImage();
+    }
+
+    public static BufferedImage convertImageToBlackWhite(BufferedImage image){
+        BufferedImageOp bufferedImageOp = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
+        BufferedImage convertedImage = bufferedImageOp.filter(image, null);
+        convertedImage.createGraphics();
+        return  convertedImage;
+    }
+
+    public void getImage() { //method to load the image in
+        try{
+            inputImage = ImageIO.read(new File("trunk/resources/testImages/cat.jpg"));
+            System.out.println("Image to be converted loaded successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Image to be converted was not loaded");
+        }
+    }
+
+    public void imageColourConversion() { //converts loaded image to black and white
+        System.out.println("Image is being converted to black and white");
+        BufferedImageOp bufferedImageOp = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
+        convertedImage = bufferedImageOp.filter(inputImage, null);
+        convertedImage.createGraphics();
+    }
+
+    public void outputImage(){ //method to output the converted image
+        try{
+            File outputImage = new File("trunk/resources/testImages/cat_blackandwhite.jpg");
+            ImageIO.write(convertedImage, "jpg", outputImage);
+            System.out.println("Converted image saved successfully");
+        } catch (IOException e){
+            System.out.println("The converted image could not be saved" + e.getMessage());
+        }
+    }
+}

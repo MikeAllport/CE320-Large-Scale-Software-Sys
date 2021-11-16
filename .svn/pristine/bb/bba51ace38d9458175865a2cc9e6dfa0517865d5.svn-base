@@ -1,0 +1,28 @@
+package group9.button_handling;
+
+import group9.CollageMakerApplication;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+public class DisplaySelectedImageHandler implements ListSelectionListener {
+
+    private CollageMakerApplication theApp;
+    private JLabel image;
+    private JList<String> filesList;
+
+    public DisplaySelectedImageHandler(CollageMakerApplication theApp, JLabel image, JList<String> filesList){
+        this.theApp = theApp;
+        this.image = image;
+        this.filesList = filesList;
+    }
+
+    public void valueChanged(ListSelectionEvent e) {
+        ImageIcon imageIcon = new ImageIcon(String.valueOf(theApp.getFileFromName(filesList.getSelectedValue())));
+        image.setIcon(imageIcon);
+    }
+}

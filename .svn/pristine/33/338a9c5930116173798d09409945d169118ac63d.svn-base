@@ -1,0 +1,42 @@
+package group9.homepage_window;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CollageOptions extends JPanel{
+
+    public CollageOptions(){
+        super();
+        setBackground(Color.WHITE);
+        TitledBorder t = new TitledBorder(new LineBorder(Color.BLACK, 3),"Collage Options");
+        t.setTitleJustification(TitledBorder.CENTER);
+        setBorder(t);
+        setPreferredSize(new Dimension(300, 400));
+
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        setLayout(gridBagLayout);
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets(10, 10, 10, 10);
+        c.gridx = 0;
+        c.gridy = 0;
+
+        //Create the radio buttons.
+        JRadioButton randomGeneration = new JRadioButton("Random");
+        add(randomGeneration, c);
+
+        c.gridx = 1;
+        c.gridy = 0;
+        JRadioButton gridGeneration = new JRadioButton("Grid");
+        gridGeneration.setSelected(true);
+        add(gridGeneration, c);
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(randomGeneration);
+        group.add(gridGeneration);
+    }
+}

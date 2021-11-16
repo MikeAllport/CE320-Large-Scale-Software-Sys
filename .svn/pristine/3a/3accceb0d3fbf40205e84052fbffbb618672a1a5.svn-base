@@ -1,0 +1,40 @@
+package group9.ButtonHandling;
+
+import group9.GridCollageGenerator.Collage;
+import group9.Piccollage;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+public class SaveCollageButtonHandler implements ActionListener {
+    private final Piccollage theApp;
+
+    public SaveCollageButtonHandler(Piccollage theApp) {
+        this.theApp = theApp;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Collage collage = theApp.getGeneratedCollages().get(theApp.getCollagePage().getCollagePreviewIndex());
+        BufferedImage image = collage.getCollageAsImage();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("PNG", ".png"));
+        if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            try {
+                ImageIO.write(image, "png", new File(file.getAbsolutePath() + ".png"));
+                JOptionPane.showMessageDialog(null, "The collage has been successfully saved");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "The collage failed to save");
+            }
+        } else {
+            System.out.println("NO FILE CHOSEN");
+        }
+    }
+}

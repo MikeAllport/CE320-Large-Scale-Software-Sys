@@ -1,0 +1,36 @@
+public class BankAccountRefactoredMine {
+    float balance, interestEarned, interestRate;
+    int dayLastOp;
+
+    public BankAccountRefactoredMine(float initialBalance, int dayCreated, float rate) {
+        balance = initialBalance;
+        dayLastOp = dayCreated;
+        interestEarned = 0.0f;
+        interestRate = rate;
+    }
+
+    public float interest(int dayDeposited){
+        return interestEarned + (dayDeposited-dayLastOp)*(interestRate*balance);
+    }
+
+    public void deposit(float amount, int dayDeposited){
+        interestEarned = interest(dayDeposited);
+        balance += amount;
+        dayLastOp = dayDeposited;
+    }
+
+    public void withdraw(float amount, int dayWithdrawn){
+        interestEarned = interest(dayWithdrawn);
+        balance -= amount;
+        dayLastOp = dayWithdrawn;
+    }
+
+    public void credit_interest() {
+        balance += interestEarned;
+        interestEarned = 0.0f;
+    }
+
+    public static BankAccountRefactoredMine create_default_account(){
+        return new BankAccountRefactoredMine(0,0,1);
+    }
+}

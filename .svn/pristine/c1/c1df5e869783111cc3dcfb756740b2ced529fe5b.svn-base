@@ -1,0 +1,28 @@
+/*
+package group9.CollageWindow;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Editor extends Canvas {
+    public Editor() {
+        setBackground(Color.GRAY);
+        setSize(300, 200);
+    }
+
+    public void paint(Graphics g) {
+        g.setColor(Color.red);
+        g.fillOval(75, 75, 150, 75);
+    }
+
+    public static void main(String[] args) {
+
+        JFrame f = new JFrame();
+        f.getContentPane().setLayout(null);
+        f.setLocationRelativeTo(null);
+        f.setBackground(Color.WHITE);
+        f.setSize(400, 400);
+
+        f.setVisible(true);
+    }
+}*/

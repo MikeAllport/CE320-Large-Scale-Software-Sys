@@ -1,0 +1,8 @@
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("CE320");
+        System.out.println("Lewis Colley");
+        System.out.println("Hiraj Keshavji hk16494");
+        System.out.println("Sumayya Shakur");
+    }
+}

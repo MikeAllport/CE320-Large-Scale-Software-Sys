@@ -1,0 +1,31 @@
+package group9.button_handling;
+
+import group9.CollageMakerApplication;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LoadImageButtonHandler implements ActionListener {
+
+    private final CollageMakerApplication theApp;
+
+    public LoadImageButtonHandler(CollageMakerApplication theApp) {
+        this.theApp = theApp;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JFileChooser c = new JFileChooser(".");
+        c.setMultiSelectionEnabled(true);
+        FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+        c.setFileFilter(imageFilter);
+        int rVal = c.showOpenDialog(theApp);
+        if (rVal == JFileChooser.APPROVE_OPTION) theApp.addFiles(c.getSelectedFiles());
+        if (rVal == JFileChooser.CANCEL_OPTION) System.out.println("user cancelled");
+    }
+
+}

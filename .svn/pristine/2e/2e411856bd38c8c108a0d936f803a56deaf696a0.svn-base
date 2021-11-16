@@ -1,0 +1,70 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
+
+/* created by Michael Allport & Hiraj Keshavji 18.11.20 */
+
+class RandomCollageGeneratorBinaryTree {
+    Dimension colageSize = new Dimension(1200, 900);
+    BufferedImage imgRandom = new BufferedImage(colageSize.width, colageSize.height, BufferedImage.TYPE_INT_RGB);
+    ArrayList<BufferedImage> imageList;
+    public String path;
+
+    // this should take an arraylist of images to initialize, code here has been hacked
+    // just to get it working and initialized
+    RandomCollageGeneratorBinaryTree()
+    {
+        ArrayList<BufferedImage> imageList = new ArrayList<>();
+        URL image1 = this.getClass().getResource("test images/dog.jpg");
+        URL image2 = this.getClass().getResource("test images/puppy.jpg");
+        try {
+            BufferedImage bufferedImage1 = ImageIO.read(image1);
+            BufferedImage bufferedImage2 = ImageIO.read(image2);
+            imageList.add(bufferedImage1);
+            imageList.add(bufferedImage2);
+        }
+        catch (Exception ignore){
+            System.out.println("Threre was an error in construction");
+        };
+        this.imageList = imageList;
+        generateRandomCollage();
+    }
+
+    void generateRandomCollage()
+    {
+        BinaryTreeBufferedImage tree = new BinaryTreeBufferedImage(colageSize);
+        Random random = new Random();
+        for (int collageNumber = 0; collageNumber < random.nextFloat() * 50; ++collageNumber)
+        {
+            int randomImageIndex = (int)(random.nextFloat() * imageList.size());
+            int randomX = (int)(random.nextFloat() * colageSize.width + 1);
+            int randomY = (int)(random.nextFloat() * colageSize.height + 1);
+            Point position = new Point(randomX, randomY);
+            tree.insertImage(position, imageList.get(randomImageIndex));
+        }
+        ArrayList<CollageBufferedImage> generatedImages = tree.getImages();
+        generatedImages.sort(CollageBufferedImage::compareTo);
+        Graphics2D randomGraphics = (Graphics2D) this.imgRandom.getGraphics();
+        for (CollageBufferedImage image: generatedImages)
+        {
+            randomGraphics.drawImage(image.image, image.bounds.getNormalizedX1(), image.bounds.getNormalizedY1(),
+                    image.bounds.getSize().width, image.bounds.getSize().height, null);
+        }
+        File generatedCollage = new File("trunk/RandomCollageGenerator/outputCollage.jpg");
+        try {
+            ImageIO.write(imgRandom, "jpg", generatedCollage);
+        }
+        catch (Exception ignore){
+            System.out.println("Threre was an error");
+        };
+    }
+
+
+    public static void main(String[] args) {
+        RandomCollageGeneratorBinaryTree gen = new RandomCollageGeneratorBinaryTree();
+    }
+}

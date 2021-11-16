@@ -1,0 +1,39 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CollagePanel extends JPanel
+{
+    List<BufferedImage> imageList;
+
+    public CollagePanel(String path) throws IOException
+    {
+        imageList = createImageList(path);
+
+        for(BufferedImage image : imageList)
+        {
+            JLabel imageLabel = new JLabel(new ImageIcon(image));
+            add(imageLabel);
+        }
+
+        repaint();
+    }
+
+    private List<BufferedImage> createImageList(String path) throws IOException
+    {
+        File f = new File(path);
+        String[] pathNames = f.list();
+        List<BufferedImage> auxList = new ArrayList<>();
+        for(String name : pathNames)
+        {
+            String imagePath = path + name; // path MUST end with "/"
+            auxList.add(ImageIO.read(new File(imagePath)));
+        }
+
+        return auxList;
+    }
+}

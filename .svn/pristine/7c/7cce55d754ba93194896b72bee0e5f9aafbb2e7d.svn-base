@@ -1,0 +1,118 @@
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class CollageGeneratorBinaryTree implements ICollageGenerator{
+    private final Dimension FRAME_DIMENSIONS;
+    boolean fixAspectRatio;
+
+    public CollageGeneratorBinaryTree(Dimension frameSize, boolean fixAspectRatio)
+    {
+        this.FRAME_DIMENSIONS = frameSize;
+        this.fixAspectRatio = fixAspectRatio;
+    }
+
+    public CollageGeneratorBinaryTree(boolean fixAspectRatio)
+    {
+        this.FRAME_DIMENSIONS = new Dimension(1200, 900);
+        this.fixAspectRatio = fixAspectRatio;
+    }
+
+    public CollageGeneratorBinaryTree()
+    {
+        this.FRAME_DIMENSIONS = new Dimension(1200, 900);
+        this.fixAspectRatio = false;
+    }
+
+    @Override
+    public BufferedImage generateCollage(ArrayList<BufferedImage> inputImageList)
+    {
+        BufferedImage output = generateImage();
+        BinaryTreeBufferedImage imageTree = generateImageTree(inputImageList);
+        writeImagesToCollage(imageTree, output);
+        return output;
+    }
+
+    private BinaryTreeBufferedImage generateImageTree(ArrayList<BufferedImage> inputImageList)
+    {
+        ArrayList<BufferedImage> copyInputList = new ArrayList<>();
+        copyInputList.addAll(inputImageList);
+        BinaryTreeBufferedImage tree = new BinaryTreeBufferedImage(FRAME_DIMENSIONS);
+        Random random = new Random();
+        for (int collageNumber = 0; collageNumber < inputImageList.size(); ++collageNumber)
+        {
+            int randomImageIndex = (int)(random.nextFloat() * copyInputList.size());
+            int randomX = (int)(random.nextFloat() * FRAME_DIMENSIONS.width + 1);
+            int randomY = (int)(random.nextFloat() * FRAME_DIMENSIONS.height + 1);
+            Point position = new Point(randomX, randomY);
+            tree.insertImage(position, inputImageList.get(randomImageIndex));
+            copyInputList.remove(randomImageIndex);
+        }
+        return tree;
+    }
+
+
+    private void writeImagesToCollage(BinaryTreeBufferedImage imageTree, BufferedImage outputImage)
+    {
+        ArrayList<BufferedImageWithBounds> generatedImages = imageTree.getImages();
+        generatedImages.sort(BufferedImageWithBounds::compareTo);
+        Graphics2D randomGraphics = (Graphics2D) outputImage.getGraphics();
+        for (BufferedImageWithBounds image : generatedImages) {
+            if (fixAspectRatio)
+                paintImageToGraphicsFixed(randomGraphics, image);
+            else
+                paintImageToGraphicsNotFixed(randomGraphics, image);
+        }
+    }
+
+    private void paintImageToGraphicsNotFixed(Graphics2D imageGraphics, BufferedImageWithBounds image)
+    {
+        imageGraphics.drawImage(image.image,
+                image.bounds.getNormalizedX1(),
+                image.bounds.getNormalizedY1(),
+                image.bounds.getSize().width,
+                image.bounds.getSize().height,
+                null);
+    }
+
+    private void paintImageToGraphicsFixed(Graphics2D imageGraphics, BufferedImageWithBounds image)
+    {
+        Dimension imageSize = new Dimension(image.image.getWidth(), image.image.getHeight());
+        Dimension sizeToDraw = getScaledDimension(imageSize, image.bounds.getSize());
+        Dimension offset = getScaledOffsets(sizeToDraw, image.bounds.getSize());
+        Random random = new Random();
+        imageGraphics.drawImage(image.image,
+                image.bounds.getNormalizedX1() + Math.round(random.nextFloat() * offset.width * 2),
+                image.bounds.getNormalizedY1() +  Math.round(random.nextFloat() * offset.height * 2),
+                sizeToDraw.width,
+                sizeToDraw.height,
+                null);
+    }
+
+    private Dimension getScaledDimension(Dimension imageSize, Dimension bounds)
+    {
+        Dimension output = new Dimension(imageSize.width, imageSize.height);
+        double scaleWidth = bounds.width / imageSize.getWidth();
+        double scaleHeight = bounds.height / imageSize.getHeight();
+        double scale = Math.min(scaleWidth, scaleHeight);
+        output.width = (int)Math.round(scale * output.width);
+        output.height = (int)Math.round(scale * output.height);
+        return output;
+    }
+
+    private Dimension getScaledOffsets(Dimension sizeToDraw, Dimension bounds)
+    {
+        Dimension offset = new Dimension(0,0);
+        if (sizeToDraw.width < bounds.width)
+            offset.width = (bounds.width - sizeToDraw.width) / 2;
+        else
+            offset.height = (bounds.height - sizeToDraw.height) / 2;
+        return offset;
+    }
+
+    private BufferedImage generateImage()
+    {
+        return new BufferedImage(FRAME_DIMENSIONS.width, FRAME_DIMENSIONS.height, BufferedImage.TYPE_INT_RGB);
+    }
+}

@@ -1,0 +1,81 @@
+package group9.RandomCollageGenerator;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+public class BinaryTreeBufferedImage {
+    BinaryTreeNodeBufferedImage root;
+    Dimension size;
+
+    public BinaryTreeBufferedImage(Dimension dimension)
+    {
+        this.root = null;
+        this.size = dimension;
+    }
+
+    public void insertImage(Point point, BufferedImage image)
+    {
+        if (root == null)
+        {
+            root = new BinaryTreeNodeBufferedImage(point, image, size);
+            return;
+        }
+
+        BinaryTreeNodeBufferedImage child = root;
+        boolean inserted = false;
+        do
+        {
+            if(child.leftChild == null && child.rightChild == null)
+            {
+                int leftX = child.bounds.getNormalizedX1();
+                int leftY = child.bounds.getNormalizedY1();
+                boolean horizontalSplit = shouldSplitHorizontally(child.bounds);
+                if (horizontalSplit)
+                {
+                    Dimension newDim = new Dimension(Math.round(child.bounds.getSize().width / 2f),
+                            child.bounds.getSize().height);
+
+                    int rightx = leftX + newDim.width;
+                    int righty = leftY;
+                    child.leftChild = new BinaryTreeNodeBufferedImage(new Point(leftX, leftY), child.image,
+                            newDim);
+                    child.rightChild = new BinaryTreeNodeBufferedImage(new Point(rightx, righty), image,
+                            newDim);
+                }
+                else
+                {
+                    Dimension newDim = new Dimension(child.bounds.getSize().width,
+                            Math.round(child.bounds.getSize().height / 2f));
+                    int rightx = leftX;
+                    int righty = leftY + newDim.height;
+                    child.leftChild = new BinaryTreeNodeBufferedImage(new Point(leftX, leftY), child.image,
+                            newDim);
+                    child.rightChild = new BinaryTreeNodeBufferedImage(new Point(rightx, righty), image,
+                            newDim);
+                }
+                inserted = true;
+            }
+            if (child.leftChild.isOverlapNormalized(point))
+                child = child.leftChild;
+            else
+                child = child.rightChild;
+        } while (!inserted);
+    }
+
+    private boolean shouldSplitHorizontally(Bounds area)
+    {
+        if (area.getSize().width > area.getSize().height)
+            return true;
+        return false;
+    }
+
+    public ArrayList<BufferedImageWithBounds> getImagesWithBoundList()
+    {
+        ArrayList<BufferedImageWithBounds> images = new ArrayList<>();
+        if (root == null)
+            return images;
+        images.addAll(root.getImages());
+        return images;
+    }
+}

@@ -1,0 +1,97 @@
+package group9.homepage_window;
+
+import group9.CollageMakerApplication;
+import group9.button_handling.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+
+
+public class Homepage extends JPanel {
+    CollageMakerApplication theApp;
+
+    public Homepage(CollageMakerApplication theApp) throws IOException {
+        this.theApp = theApp;
+        setLayout(new BorderLayout());
+
+        ImageIcon img = new ImageIcon("trunk\\resources\\icons\\collage.png");
+        theApp.setIconImage(img.getImage());
+
+        JPanel topButtonBar = new JPanel(new GridLayout(1, 2));
+        JPanel botButtonBar = new JPanel(new FlowLayout());
+
+        JPanel topLeftButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel topRightButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        JPanel placeholderArea = new JPanel(new BorderLayout());
+
+
+        topButtonBar.add(topLeftButtons);
+        topButtonBar.add(topRightButtons);
+
+        JLabel image = new JLabel();
+
+        //load image button including resizing icon image to fit button
+        JButton loadImageBtn = scaleButtonIcon("trunk\\resources\\icons\\load_image_button.png", 75,75);
+
+        //delete image button including resizing icon image to fit button
+        JButton deleteImageButton = scaleButtonIcon("trunk\\resources\\icons\\delete_button.png", 67,67);
+
+        //help homepage button including resizing icon image to fit button
+        JButton helpHomePageBtn = scaleButtonIcon("trunk\\resources\\icons\\help_icon_button.png", 75,75);
+
+        //generate collage button including resizing icon image to fit button
+        JButton generateBtn = scaleButtonIcon("trunk\\resources\\icons\\generate_collage_button.png", 75,75);
+
+
+        //customise collage button including resizing icon image to fit button - iteration 2
+        /*JButton customiseCollageBtn = new JButton();
+        ImageIcon customiseButtonImage = new ImageIcon("trunk\\resources\\icons\\customise_image_button.png");
+        Image resizingCustomiseButtonImage = customiseButtonImage.getImage().getScaledInstance(67,67,Image.SCALE_SMOOTH);
+        ImageIcon resizedCustomiseButtonImage = new ImageIcon(resizingCustomiseButtonImage);
+        customiseCollageBtn.setIcon(resizedCustomiseButtonImage);
+        customiseCollageBtn.setPreferredSize(new Dimension(75, 75));
+        customiseCollageBtn.setBorder(null);*/
+
+        JList<String> filesList = new JList<>(theApp.getFileNamesModel());
+        filesList.setPreferredSize(new Dimension(200,400));
+        filesList.setVisible(true);
+        filesList.addListSelectionListener(new DisplaySelectedImageHandler(theApp,image,filesList));
+
+        topLeftButtons.add(loadImageBtn);
+        topLeftButtons.add(deleteImageButton);
+        topRightButtons.add(helpHomePageBtn);
+
+        botButtonBar.add(generateBtn);
+        //botButtonBar.add(customiseCollageBtn);
+
+        JPanel imagePanel = new JPanel();
+        imagePanel.setSize(new Dimension(600,400));
+        imagePanel.add(image);
+        placeholderArea.add(filesList, BorderLayout.LINE_START);
+        placeholderArea.add(imagePanel, BorderLayout.CENTER);
+
+
+        add(topButtonBar, BorderLayout.PAGE_START);
+        add(placeholderArea, BorderLayout.CENTER);
+        add(botButtonBar, BorderLayout.PAGE_END);
+
+        loadImageBtn.addActionListener(new LoadImageButtonHandler(theApp));
+        deleteImageButton.addActionListener(new DeleteImageButtonHandler(theApp,filesList));
+        helpHomePageBtn.addActionListener(new HelpButtonHandler(theApp));
+        //customiseCollageBtn.addActionListener(new CustomiseCollageButtonHandler(theApp)); - for iteration 2
+        generateBtn.addActionListener(new GenerateCollageButtonHandler(theApp));
+    }
+
+    private JButton scaleButtonIcon(String s, int width, int height) {
+        JButton button = new JButton();
+        ImageIcon helpButtonImage = new ImageIcon(s);
+        Image resizingHelpButtonImage = helpButtonImage.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon resizedHelpButtonImage = new ImageIcon(resizingHelpButtonImage);
+        button.setIcon(resizedHelpButtonImage);
+        button.setPreferredSize(new Dimension(width, height));
+        button.setBorder(null);
+        return button;
+    }
+}

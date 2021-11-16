@@ -1,0 +1,44 @@
+package group9.button_handling;
+
+import group9.CollageMakerApplication;
+import group9.homepage_window.CopyrightsPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class HelpButtonHandler extends JFrame implements ActionListener
+{
+    private CollageMakerApplication theApp;
+
+    public HelpButtonHandler(CollageMakerApplication theApp)
+    {
+        this.theApp = theApp;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        HelpButtonHandler HelpPageWindow = new HelpButtonHandler(theApp);
+        HelpPageWindow.setVisible(true);
+        HelpPageWindow.setSize(500,500);
+        HelpPageWindow.setResizable(false);
+        HelpPageWindow.setTitle("WELCOME TO PICOLLAGE!");
+        ImageIcon titleIcon = new ImageIcon("trunk\\resources\\icons\\help_icon_button.png");
+        HelpPageWindow.setIconImage(titleIcon.getImage());
+
+        JLabel helpInstructions = new JLabel(
+                "Homepage: Simply load images into the application using the load button in " +
+                        "top left. Any images you load can viewed on the screen. Click the Delete button in the top " +
+                        "left to remove any image you've selected. When you're ready to generate the collage, click the " +
+                        "Generate button at the bottom" +
+                        "" +
+                        "" +
+                        " Collage Page: You can cycle through collages using the back and next buttons. If you " +
+                        "like the generated collage, click the Save button to save it to your desktop. " +
+                        "If you don't like it, click the Delete button to discard the collage. Alternatively, " +
+                        "click the Home button to return to the previous screen");
+        helpInstructions.setVisible(true);
+        HelpPageWindow.add(helpInstructions);
+    }
+}

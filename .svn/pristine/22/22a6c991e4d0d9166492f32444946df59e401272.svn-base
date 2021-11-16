@@ -1,0 +1,25 @@
+//import org.junit.Test;
+//
+//import static org.junit.Assert.*;
+//
+//public class BoundsTest {
+//    group9.RandomCollageGenerator.Bounds bound1;
+//    group9.RandomCollageGenerator.Bounds bound2;
+//
+//    @Test
+//    public void isOverlapNormalized() {
+//        bound1 = new group9.RandomCollageGenerator.Bounds(0,100,0,100);
+//        bound2 = new group9.RandomCollageGenerator.Bounds(100,200,0,100);
+//        assertFalse(bound1.isOverlap(bound2));
+//        assertFalse(bound1.isOverlapNormalized(bound2));
+//        bound2 = new group9.RandomCollageGenerator.Bounds (99,199,0,100);
+//        assertTrue(bound1.isOverlap(bound2));
+//        assertTrue(bound1.isOverlapNormalized(bound2));
+//        bound2 = new group9.RandomCollageGenerator.Bounds (0,100,100,200);
+//        assertFalse(bound1.isOverlap(bound2));
+//        assertFalse(bound1.isOverlapNormalized(bound2));
+//        bound2 = new group9.RandomCollageGenerator.Bounds (0,100,99,199);
+//        assertTrue(bound1.isOverlap(bound2));
+//        assertTrue(bound1.isOverlapNormalized(bound2));
+//    }
+//}

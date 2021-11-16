@@ -1,0 +1,38 @@
+package group9.HomepageWindow;
+
+import group9.Piccollage;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+
+//The panel where the preview of image selected in JList is shown
+public class PreviewImages extends JPanel {
+
+    public PreviewImages(JLabel image, Piccollage theApp) {
+        super();
+        setBackground(Color.WHITE);
+
+        //Add a border with a title to show bounding boxes
+        TitledBorder t = new TitledBorder(new LineBorder(Color.BLACK, 3), "PREVIEW IMAGE");
+        t.setTitleJustification(TitledBorder.CENTER);
+        setBorder(t);
+        setPreferredSize(new Dimension(450, 400));
+        setLayout(new BorderLayout());
+
+        image.setBorder(new EmptyBorder(15, 15, 15, 15));
+        image.setHorizontalAlignment(JLabel.CENTER);
+        image.setVerticalAlignment(JLabel.CENTER);
+
+        image.setVerticalTextPosition(JLabel.BOTTOM);
+        image.setHorizontalTextPosition(JLabel.CENTER);
+        add(image);
+
+        JPanel generateCollage = new JPanel();
+        generateCollage.setBackground(Color.WHITE);
+
+        add(generateCollage, BorderLayout.PAGE_END);
+    }
+}

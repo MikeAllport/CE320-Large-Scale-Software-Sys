@@ -1,0 +1,118 @@
+package group9.HomepageWindow;
+
+import group9.Piccollage;
+import group9.CustomComponents.CustomJPanel;
+import group9.CustomComponents.PreviewImageJPanel;
+import group9.ButtonHandling.*;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
+
+public class HomePage {
+    private Piccollage theApp;
+    private CustomJPanel mainJPanel;
+    public HomePage(Piccollage theApp) {
+        this.theApp = theApp;
+        this.mainJPanel = new CustomJPanel();
+
+        GridBagConstraints c = mainJPanel.getConstraints();
+
+        //'load image' button
+        JButton loadImageBtn = mainJPanel.createButton("load");
+
+        //'delete image' button
+        JButton deleteImageButton = mainJPanel.createButton("delete");
+
+        //clear All button including resizing icon image to fit button
+       // JButton clearAllButton = mainJPanel.createButton("clear all");
+
+        //Adding 'load image', 'delete image', 'clearall" button to panel
+        JPanel loadDeleteClearAll = new JPanel();
+        loadDeleteClearAll.setBackground(Color.WHITE);
+        loadDeleteClearAll.add(loadImageBtn);
+        loadDeleteClearAll.add(deleteImageButton);
+       // loadDeleteClearAll.add(clearAllButton);
+
+        //Adding 'loadDelete' JPanel to cell (0, 0) in main JPanel
+        c.gridx = 0;
+        c.gridy = 0;
+        mainJPanel.add(loadDeleteClearAll, c);
+
+        //'help image' button
+        JButton helpHomePageBtn = mainJPanel.createButton("help");
+
+        //Adding 'help' button to cell (2, 0)
+        c.gridx = 2;
+        c.gridy = 0;
+        mainJPanel.add(helpHomePageBtn, c);
+
+        //Setting title for the application
+        c.gridx = 1;
+        c.gridy = 0;
+        JLabel t = new JLabel("Piccollage", SwingConstants.CENTER);
+        t.setFont(new Font("Helvetica", Font.BOLD, 40));
+        mainJPanel.add(t, c);
+
+        c.weightx = 0.5;
+        c.weighty = 0.5;
+
+        c.gridx = 0;
+        c.gridy = 1;
+        ImageList imageThumbnails = new ImageList(theApp);
+
+        JLabel image = new JLabel(); //Preview of selected image in JList
+
+        //Initialising JFileList
+        JList<File> filesList = new JList<>(theApp.getFileNamesModel());
+        filesList.setCellRenderer(mainJPanel.createListRenderer());
+        filesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        filesList.addListSelectionListener(new DisplaySelectedImageHandler(theApp, image, filesList));
+
+        //Adding List to Scrollable area
+        JScrollPane s = new JScrollPane(filesList);
+        s.setBorder(new EmptyBorder(10,10,10,10));
+        imageThumbnails.add(s, BorderLayout.CENTER);
+
+        mainJPanel.add(imageThumbnails, c);
+
+
+        //'generate collage' button
+        JButton generateBtn = mainJPanel.createButton("generate");
+        generateBtn.addActionListener(new GenerateCollageButtonHandler(theApp));
+
+        //adding preview image panel to main JPanel
+        PreviewImageJPanel previewImagesJPanel = new PreviewImageJPanel(image);
+        previewImagesJPanel.setMaximumSize(new Dimension(500, 500));
+        previewImagesJPanel.add(generateBtn, BorderLayout.PAGE_END);
+
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        mainJPanel.add(previewImagesJPanel, c);
+
+        c.gridwidth = 1;
+
+        //Adding in buttonHandlers for their respective buttons
+        loadImageBtn.addActionListener(new LoadImageButtonHandler(theApp));
+        deleteImageButton.addActionListener(new DeleteImageButtonHandler(theApp, filesList));
+        helpHomePageBtn.addActionListener(new HelpButtonHandler(theApp));
+      //  clearAllButton.addActionListener(new ClearAllButtonHandler(theApp));
+    }
+
+    public JPanel getHomePage(){
+        return mainJPanel;
+    }
+
+    public static void main(String[] args) throws IOException {
+        JFrame f = new JFrame();
+        f.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+        HomePage page = new HomePage(new Piccollage());
+        f.add(page.getHomePage());
+        f.setVisible(true);
+        f.pack();
+    }
+}

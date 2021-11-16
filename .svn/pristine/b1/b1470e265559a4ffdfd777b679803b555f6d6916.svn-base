@@ -1,0 +1,94 @@
+package group9.CollageWindow;
+
+import group9.ButtonHandling.ConversionToGreyscaleButtonHandler;
+import group9.ButtonHandling.RevertToColourFromGreyscale;
+import group9.Piccollage;
+import group9.utils.Utils;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import static group9.CollageWindow.Colors.*;
+
+public class CollageOptions extends JTabbedPane {
+
+    public CollageOptions(Piccollage theApp) {
+        super();
+        setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        setMinimumSize(new Dimension(400, 90));
+
+        JPanel tab1 = new JPanel();
+        tab1.setLayout(new BoxLayout(tab1, BoxLayout.X_AXIS));
+
+        JScrollPane tab1_scrollable = new JScrollPane(tab1); //making tab scrollable
+
+        JLabel lblRetro = new JLabel();
+        lblRetro.setIcon(getImageIcon(lblRetro));
+
+        tab1.add(Box.createRigidArea(new Dimension(5,0))); //add H-Gap
+        tab1.add(lblRetro);
+        tab1.add(Box.createRigidArea(new Dimension(5,0))); //add H-Gap
+
+        JLabel lblComic = new JLabel();
+        lblComic.setText("Comic");
+
+        tab1.add(Box.createRigidArea(new Dimension(5,0))); //add H-Gap
+        tab1.add(lblComic);
+        tab1.add(Box.createRigidArea(new Dimension(5,0))); //add H-Gap
+
+
+        tab1_scrollable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        tab1_scrollable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+
+        addTab("Filter", tab1_scrollable);
+
+
+        JPanel tab2 = new JPanel();
+        addTab("Frames", tab2);
+
+        JPanel tab3 = new JPanel();
+        addTab("Effects", tab3);
+
+        JPanel tab4 = new JPanel();
+        addTab("Rotate", tab4);
+
+        JPanel tab5 = new JPanel();
+        addTab("Stickers/Text", tab5);
+
+        JPanel tab6 = new JPanel();
+        String[] colours = {BLACK.getLabel(), BEIGE.getLabel(), GREY.getLabel(), WHITE.getLabel()};
+        JComboBox<String> comboColours = new JComboBox<>(colours);
+        comboColours.addActionListener(new ColorComboListener(theApp));
+        comboColours.setFont(new Font("Arial", Font.BOLD, 14));
+        comboColours.setEditable(false);
+        tab6.add(comboColours);
+        addTab("Background Colour", tab6);
+
+        JPanel tab8 = new JPanel();
+        JButton convertGreyscale = new JButton("Convert To Greyscale");
+        JButton revertToColour = new JButton("Revert To Colour");
+        convertGreyscale.addActionListener(new ConversionToGreyscaleButtonHandler(theApp));
+        revertToColour.addActionListener(new RevertToColourFromGreyscale(theApp));
+        tab8.add(convertGreyscale);
+        tab8.add(revertToColour);
+        addTab("Greyscale", tab8);
+    }
+
+    private ImageIcon getImageIcon(JLabel lbl) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File(System.getProperty("user.dir") + "/trunk/resources/icons/retro_filter.png"));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        Image img = Utils.rescaleIcon(image, 50, 50);
+
+        return new ImageIcon(img);
+    }
+
+    public static void main(String[] args){
+    }
+}

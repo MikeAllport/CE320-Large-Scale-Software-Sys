@@ -1,0 +1,41 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+public class CollageTestFrameContext extends JFrame {
+    protected Dimension frameDimensions = new Dimension(900,600);;
+    private static final int NUM_COLUMNS = 3;
+
+    CollageTestFrameContext()
+    {
+        setupPanel();
+        setupFrame();
+    }
+
+
+    void setupPanel()
+    {
+        ArrayList<BufferedImage> imagesList = CollagePainterTestImages.getBufferedImages();
+        JPanel innerPanel = new CollageTestPanel(this.frameDimensions, NUM_COLUMNS, imagesList);
+        Dimension panelDimensionLessTitleBar = new Dimension(this.frameDimensions.width,
+                this.frameDimensions.height - 50);
+        innerPanel.setPreferredSize(panelDimensionLessTitleBar);
+        this.add(innerPanel);
+    }
+
+    void setupFrame()
+    {
+        this.setPreferredSize(this.frameDimensions);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setVisible(true);
+        this.pack();
+    }
+
+
+
+    public static void main(String[] args) {
+        new CollageTestFrameContext();
+    }
+}

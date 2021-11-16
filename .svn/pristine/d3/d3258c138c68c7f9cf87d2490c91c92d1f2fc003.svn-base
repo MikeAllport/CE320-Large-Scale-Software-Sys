@@ -1,0 +1,57 @@
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+public class BinaryTreeNodeBufferedImage {
+    Point position; // normalized
+    Dimension size;
+    Bounds bounds;
+    boolean horizontal;
+    BufferedImage image;
+    BinaryTreeNodeBufferedImage leftChild, rightChild;
+
+    BinaryTreeNodeBufferedImage(Point point, BufferedImage image, Dimension size, boolean horizontal)
+    {
+        this.bounds = new Bounds(point, size);
+        this.horizontal = horizontal;
+        this.image = image;
+        this.position = point;
+        this.size = size;
+    }
+
+    public ArrayList<CollageBufferedImage> getImages()
+    {
+        ArrayList<CollageBufferedImage> images = new ArrayList<>();
+        images.addAll(getImagesRecursive());
+        return images;
+    }
+
+    private ArrayList<CollageBufferedImage> getImagesRecursive()
+    {
+        ArrayList<CollageBufferedImage> images = new ArrayList<>();
+        if (leftChild == null && rightChild == null) {
+            CollageBufferedImage collageImage = new CollageBufferedImage(this.image, this.bounds);
+            images.add(collageImage);
+            return images;
+        }
+        images.addAll(leftChild.getImagesRecursive());
+        images.addAll(rightChild.getImagesRecursive());
+        return images;
+    }
+
+    boolean isOverlap(Point point)
+    {
+        // simple AABB check
+        return this.bounds.isOverlap(point.getX(), point.getY(), this.size);
+    }
+
+    boolean isOverlapNormalized(Point point)
+    {
+        return this.bounds.isOverlapNormalized(point.getX(), point.getY(), this.size);
+    }
+
+    boolean hasData()
+    {
+        return image != null;
+    }
+}

@@ -1,0 +1,10 @@
+package com;
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("hk16494 was here");
+        System.out.println("mt1886 was here");
+        System.out.println("lc18166 was here");
+
+    }
+}

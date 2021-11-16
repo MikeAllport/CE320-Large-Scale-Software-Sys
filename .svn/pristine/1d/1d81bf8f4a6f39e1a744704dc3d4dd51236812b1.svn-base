@@ -1,0 +1,91 @@
+package group9;
+
+import group9.CollageMakerApplication;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+//Collage Selector Screen
+public class CollagePreview_Page extends JPanel
+{
+
+    // group9.CollageMakerApplication theApp;
+
+    public CollagePreview_Page(/*group9.CollageMakerApplication theApp*/) {
+        //this.theApp=theApp;
+
+        JButton customise_collage_preview_btn = new JButton("CUSTOMISE (FUTURE ITERATIONS)");
+        JButton back_to_homepage_btn = new JButton("BACK TO HOMEPAGE");
+        JButton previous_collage_btn = new JButton("PREVIOUS");
+        JButton next_collage_btn = new JButton("NEXT");
+        JButton save_collage_btn = new JButton("SAVE COLLAGE");
+        JButton help_collage_preview_btn = new JButton("HELP");
+        JButton discard_collage_btn = new JButton("DISCARD");
+
+        add(customise_collage_preview_btn);
+        add(back_to_homepage_btn);
+        add(previous_collage_btn);
+        add(save_collage_btn);
+        add(next_collage_btn);
+        add(help_collage_preview_btn);
+        add(discard_collage_btn);
+
+        customise_collage_preview_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL ALLOW USER TO CUSTOMISE A GENERATED COLLAGE - FOR FUTURE ITERATIONS");
+            }
+        });
+
+        back_to_homepage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CollageMakerApplication collageMakerApplication = new CollageMakerApplication();
+                //theApp.setDisplay(collageMakerApplication);
+                System.out.println("CODE WILL RETURN TO HOMEPAGE");
+            }
+        });
+
+        previous_collage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL CYCLE TO PREVIOUS COLLAGE");
+            }
+        });
+
+        save_collage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE SHOULD RUN FILE-EXPLORER TO SAVE GENERATED COLLAGE ");
+            }
+        });
+
+        next_collage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL CYCLE TO NEXT COLLAGE");
+            }
+        });
+
+        help_collage_preview_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL SHOW BRIEF INSTRUCTIONS FOR COLLAGE PREVIEW PAGE");
+            }
+        });
+
+        discard_collage_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("DISCARDED COLALGE");
+            }
+        });
+    }
+}

@@ -1,0 +1,91 @@
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class CollageGeneratorGridBased implements ICollageGenerator{
+    private int COLLAGE_ROWS, COLLAGE_COLUMNS, MAX_COLUMN_SIZE, MAX_ROW_SIZE;
+    private final Dimension FRAME_DIMENSIONS;
+
+    // constructor for testing, we may not require colageRows/Columns depending on implementation
+    // of space partitioning
+    CollageGeneratorGridBased(Dimension frameDimension, int collageColumns)
+    {
+        this.COLLAGE_COLUMNS = collageColumns;
+        this.FRAME_DIMENSIONS = frameDimension;
+    }
+
+    @Override
+    public BufferedImage generateCollage(ArrayList<BufferedImage> inputImageList)
+    {
+        this.COLLAGE_ROWS = inputImageList.size() / COLLAGE_COLUMNS;
+        this.MAX_COLUMN_SIZE = FRAME_DIMENSIONS.width / COLLAGE_COLUMNS;
+        this.MAX_ROW_SIZE = FRAME_DIMENSIONS.height / COLLAGE_ROWS;
+        BufferedImage outputImage = generateImage();
+        paintCollage(inputImageList, outputImage);
+        return outputImage;
+    }
+
+    private BufferedImage generateImage()
+    {
+        return new BufferedImage(FRAME_DIMENSIONS.width, FRAME_DIMENSIONS.height, BufferedImage.TYPE_INT_RGB);
+    }
+
+    private void paintCollage(ArrayList<BufferedImage> inputImageList, BufferedImage outputImage)
+    {
+        Graphics2D outputImageGraphics = (Graphics2D) outputImage.getGraphics();
+        AffineTransform originalTransform =  outputImageGraphics.getTransform();
+        for (int imageIndex = 0; imageIndex < inputImageList.size(); imageIndex++)
+        {
+            BufferedImage image = inputImageList.get(imageIndex);
+            Random random = new Random();
+            Point position = getPosition(imageIndex);
+            int randomOneZero = (int) Math.floor(random.nextFloat() * 2);
+            if (randomOneZero == 0)
+                paintStandardRectangleImage(outputImageGraphics, image, position);
+            else
+            {
+                double rotationRadians = getRandomRotationRadians(random);
+                paintRotatedRectangleImage(outputImageGraphics, image, rotationRadians, position);
+            }
+            outputImageGraphics.setTransform(originalTransform);
+            // important to set transform back to original at each step
+        }
+    }
+
+    void paintStandardRectangleImage(Graphics2D g, BufferedImage image, Point position)
+    {
+        g.drawImage(image, (int)position.getX(), (int)position.getY(), MAX_COLUMN_SIZE, MAX_ROW_SIZE, null);
+    }
+
+    void paintRotatedRectangleImage(Graphics2D g, BufferedImage image, double rotationRadians, Point position)
+    {
+        AffineTransform at = new AffineTransform();
+        at.translate(position.getX() + MAX_COLUMN_SIZE / 2f, position.getY() + MAX_ROW_SIZE / 2f);
+        //TODO: put a scale here, figure out how much image has changed in size and apply scale
+        at.rotate(rotationRadians);
+        at.translate(-position.getX() + MAX_COLUMN_SIZE / -2f, -position.getY() + MAX_ROW_SIZE / -2f);
+        g.setTransform(at);
+        g.drawImage(image, position.getX(), position.getY(), MAX_COLUMN_SIZE, MAX_ROW_SIZE, null);
+    }
+
+    double getRandomRotationRadians(Random random)
+    {
+        int rotationRandBounds = 60;
+        double rotationDegrees = Math.floor(random.nextFloat() * 2 * (rotationRandBounds + 1))
+                - rotationRandBounds;
+        double rotationRadians = Math.toRadians(rotationDegrees);
+        return rotationRadians;
+    }
+
+    private Point getPosition(int step)
+    {
+        int whatColumn = step % COLLAGE_COLUMNS;
+        int whatRow = step / COLLAGE_COLUMNS;
+        int positionX = whatColumn * MAX_COLUMN_SIZE;
+        int positionY = whatRow * MAX_ROW_SIZE;
+        Point position = new Point(positionX, positionY);
+        return position;
+    }
+}

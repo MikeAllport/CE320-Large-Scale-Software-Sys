@@ -1,0 +1,46 @@
+package group9.CollageWindow;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import static group9.CollageWindow.Colors.*;
+import group9.GridCollageGenerator.Collage;
+import group9.Piccollage;
+
+public class ColorComboListener implements ActionListener {
+    Piccollage theApp;
+
+    public ColorComboListener(Piccollage theApp)
+    {
+        this.theApp = theApp;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JComboBox box = (JComboBox) e.getSource();
+        String boxValue = (String) box.getSelectedItem();
+        Colors colorEnum = Colors.getEnumFromString(boxValue);
+        if (colorEnum == null)
+            return;
+        switch (colorEnum)
+        {
+            case BLACK:
+                Collage.setBackgroundColor(Colors.getColor(BLACK));
+                theApp.getCollagePage().setCollagePreviewImage(0);
+                break;
+            case BEIGE:
+                System.out.println("Got Here");
+                Collage.setBackgroundColor(Colors.getColor(BEIGE));
+                theApp.getCollagePage().setCollagePreviewImage(0);
+                break;
+            case GREY:
+                Collage.setBackgroundColor(Colors.getColor(GREY));
+                theApp.getCollagePage().setCollagePreviewImage(0);
+                break;
+            case WHITE:
+                Collage.setBackgroundColor(Colors.getColor(WHITE));
+                theApp.getCollagePage().setCollagePreviewImage(0);
+                break;
+        }
+    }
+}

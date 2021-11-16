@@ -1,0 +1,23 @@
+package group9.button_handling;
+
+import group9.CollageMakerApplication;
+import group9.CollagePreview_Page;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class GenerateCollageButtonHandler implements ActionListener
+{
+    private CollageMakerApplication theApp;
+
+    public GenerateCollageButtonHandler(CollageMakerApplication theApp)
+    {
+        this.theApp = theApp;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        CollagePreview_Page collagepreview_page = new CollagePreview_Page();
+        theApp.setDisplay(collagepreview_page);
+        System.out.println("CODE WILL GENERATE A COLLAGE BASED ON THE IMAGES THAT ARE LOADED AND GO TO THE NEXT PAGE TO PREVIEW 4-5 COLLAGES");
+    }
+}

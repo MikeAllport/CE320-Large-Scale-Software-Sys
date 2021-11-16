@@ -1,0 +1,30 @@
+package group9.button_handling;
+
+import group9.CollageMakerApplication;
+import group9.homepage_window.Homepage;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+public class BackToHomepageButtonHandler implements ActionListener
+{
+    private CollageMakerApplication theApp;
+
+    public BackToHomepageButtonHandler(CollageMakerApplication theApp)
+    {
+        this.theApp = theApp;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Homepage homepage = null;
+        try {
+            homepage = new Homepage(theApp);
+            CollageMakerApplication.setCurrent("homepage");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        theApp.setDisplay(homepage);
+        System.out.println("CODE WILL RETURN TO HOMEPAGE.");
+    }
+}

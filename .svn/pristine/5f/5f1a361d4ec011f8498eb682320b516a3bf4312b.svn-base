@@ -1,0 +1,105 @@
+package group9;
+
+import group9.CollageMakerApplication;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+
+// group9.CollagePreview
+public class CollagePreview_Page extends JPanel
+{
+    // group9.CollageMakerApplication theApp;
+
+    public CollagePreview_Page(/*group9.CollageMakerApplication theApp*/) {
+        //this.theApp=theApp;
+
+        setLayout(new BorderLayout());
+
+        JPanel topButtonBar_CollagePreview = new JPanel(new GridLayout(1, 2));
+        JPanel botButtonBar_CollagePreview= new JPanel(new GridLayout(1, 2));
+
+        JPanel topLeftBtns_CollagePreview = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel topRightBtns_CollagePreview = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        JPanel botLeftBtns_CollagePreview = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel botRightBtns_CollagePreview = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        topButtonBar_CollagePreview.add(topLeftBtns_CollagePreview);
+        topButtonBar_CollagePreview.add(topRightBtns_CollagePreview);
+
+        botButtonBar_CollagePreview.add(botLeftBtns_CollagePreview);
+        botButtonBar_CollagePreview.add(botRightBtns_CollagePreview);
+
+        JButton testBn = new JButton("PLACEHOLDER BUTTON FOR COLLAGE PREVIEW");
+        JButton back_to_homepage_btn = new JButton("BACK TO HOMEPAGE");
+        JButton previous_collage_btn = new JButton("PREVIOUS");
+        JButton next_collage_btn = new JButton("NEXT");
+        JButton save_collage_btn = new JButton("SAVE COLLAGE");
+        JButton help_collage_preview_btn = new JButton("HELP");
+        JButton discard_collage_btn = new JButton("DISCARD");
+
+        topLeftBtns_CollagePreview.add(previous_collage_btn);
+        topLeftBtns_CollagePreview.add(next_collage_btn);
+        topRightBtns_CollagePreview.add(help_collage_preview_btn);
+
+        botLeftBtns_CollagePreview.add(back_to_homepage_btn);
+        botRightBtns_CollagePreview.add(discard_collage_btn);
+        botRightBtns_CollagePreview.add(save_collage_btn);
+
+        add(topButtonBar_CollagePreview, BorderLayout.NORTH);
+        add(testBn, BorderLayout.CENTER);
+        add(botButtonBar_CollagePreview, BorderLayout.SOUTH);
+
+        back_to_homepage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CollageMakerApplication collageMakerApplication = new CollageMakerApplication();
+                //theApp.setDisplay(collageMakerApplication);
+                System.out.println("CODE WILL RETURN TO HOMEPAGE");
+            }
+        });
+
+        previous_collage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL CYCLE TO PREVIOUS COLLAGE");
+            }
+        });
+
+        save_collage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE SHOULD RUN FILE-EXPLORER TO SAVE GENERATED COLLAGE ");
+            }
+        });
+
+        next_collage_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL CYCLE TO NEXT COLLAGE");
+            }
+        });
+
+        help_collage_preview_btn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CODE WILL SHOW BRIEF INSTRUCTIONS FOR COLLAGE PREVIEW PAGE");
+            }
+        });
+
+        discard_collage_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("DISCARD COLLAGE");
+            }
+        });
+    }
+}

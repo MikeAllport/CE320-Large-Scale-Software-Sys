@@ -1,0 +1,6 @@
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+public interface ICollageGenerator {
+    BufferedImage generateCollage(ArrayList<BufferedImage> inputImageList);
+}

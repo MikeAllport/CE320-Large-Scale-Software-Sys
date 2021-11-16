@@ -1,0 +1,112 @@
+package group9.HomepageWindow;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class MenuBar extends JMenuBar {
+    JMenu file, accessibility, view, window, help;
+    JMenuItem newCollage, exitApplication,
+            MagnifyText, copy,
+            fullScreen, minimize,
+            HomepageHelp, CollageHelp;
+
+    public MenuBar() {
+        initializeMenus();
+        initializeMenuItems();
+        initializeMenuListener();
+
+        this.add(file);
+        this.add(view);
+        this.add(help);
+        this.add(window);
+    }
+
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Menu");
+        MenuBar m = new MenuBar();
+        f.setJMenuBar(m);
+        f.setSize(400, 400);
+        f.setLayout(null);
+        f.setVisible(true);
+    }
+
+    private void initializeMenus() {
+        this.file = new JMenu("File");
+        this.accessibility = new JMenu("Accessibility");
+        this.view = new JMenu("View");
+        this.window = new JMenu("Window");
+        this.help = new JMenu("Help");
+    }
+
+    private void initializeMenuItems() {
+
+        // Items under header 'File'
+        this.newCollage = new JMenuItem("New");
+        this.exitApplication = new CustomJMenuItem("Exit");
+        file.add(newCollage);
+        file.add(exitApplication);
+
+        // Items under header 'Accessibility'
+        this.MagnifyText = new JMenuItem("Magnify Text");
+        this.copy = new JMenuItem("Copy");
+        accessibility.add(MagnifyText);
+        accessibility.add(copy);
+
+        //Items under header 'View'
+        this.fullScreen = new CustomJMenuItem("Full Screen");
+        view.add(fullScreen);
+        view.addSeparator();
+        view.add(accessibility);
+
+        //Items under header 'Window'
+        this.minimize = new CustomJMenuItem("Minimize");
+        window.add(minimize);
+
+
+        //Items under header 'Help'
+        this.HomepageHelp = new CustomJMenuItem("Homepage");
+        this.CollageHelp = new JMenuItem("Collage");
+        help.add(HomepageHelp);
+        help.add(CollageHelp);
+    }
+
+    private void initializeMenuListener() {
+       // this.exitApplication.addActionListener(e -> System.exit(0));
+    }
+}
+
+class CustomJMenuItem extends JMenuItem {
+    public CustomJMenuItem(String text) {
+        super(text);
+
+        switch (text.toLowerCase()) {
+            case "exit":
+                addActionListener(e -> System.exit(0));
+                break;
+            case "minimize":
+                addActionListener(e -> {
+                    JPopupMenu popupMenu = (JPopupMenu) getParent();
+                    Component invoker = popupMenu.getInvoker();
+                    JComponent invokerAsJComponent = (JComponent) invoker;
+                    Container parentFrame = invokerAsJComponent.getTopLevelAncestor();
+                    ((JFrame) parentFrame).setExtendedState(JFrame.ICONIFIED);
+                });
+                break;
+            case "full screen":
+                addActionListener(e -> {
+                    JPopupMenu popupMenu = (JPopupMenu) getParent();
+                    Component invoker = popupMenu.getInvoker();
+                    JComponent invokerAsJComponent = (JComponent) invoker;
+                    Container parentFrame = invokerAsJComponent.getTopLevelAncestor();
+                    ((JFrame) parentFrame).setExtendedState(JFrame.MAXIMIZED_BOTH);
+                });
+                break;
+            case "homepage":
+                addActionListener(e -> {
+                });
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + text.toLowerCase());
+        }
+    }
+}

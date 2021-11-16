@@ -1,0 +1,60 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
+
+/* created by Michael Allport & Hiraj Keshavji 18.11.20 */
+
+class TestCollageGeneratorMain {
+
+
+    ArrayList<BufferedImage> imageList;
+    public String path;
+
+    // this should take an arraylist of images to initialize, code here has been hacked
+    // just to get it working and initialized
+    TestCollageGeneratorMain()
+    {
+        ArrayList<BufferedImage> imageList = new ArrayList<>();
+        URL image1 = this.getClass().getResource("test images/dog.jpg");
+        URL image2 = this.getClass().getResource("test images/puppy.jpg");
+        try {
+            BufferedImage bufferedImage1 = ImageIO.read(image1);
+            BufferedImage bufferedImage2 = ImageIO.read(image2);
+            imageList.add(bufferedImage1);
+            imageList.add(bufferedImage2);
+        }
+        catch (Exception ignore){
+            System.out.println("Threre was an error in construction");
+        };
+        this.imageList = imageList;
+        generateRandomCollage();
+    }
+
+    void generateRandomCollage()
+    {
+        ICollageGenerator generator;
+        Dimension sizeToPaint = new Dimension(1200, 900);
+        // Test binary tree method
+        generator = new CollageGeneratorBinaryTree(sizeToPaint, true);
+        // Test grid method
+//        generator = new CollageGeneratorGridBased(sizeToPaint, 3);
+        BufferedImage result = generator.generateCollage(TestImageLoader.getBufferedImages());
+        // export file
+        try {
+            File generatedCollage = new File("trunk/RandomCollageGenerator/outputCollage.jpg");
+            ImageIO.write(result, "jpg", generatedCollage);
+        }
+        catch (Exception ignore){
+            System.out.println("Threre was an error");
+        };
+    }
+
+
+    public static void main(String[] args) {
+        TestCollageGeneratorMain gen = new TestCollageGeneratorMain();
+    }
+}

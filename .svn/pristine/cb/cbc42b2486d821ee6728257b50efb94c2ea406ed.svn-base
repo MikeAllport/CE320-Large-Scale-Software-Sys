@@ -1,0 +1,112 @@
+//import javax.imageio.ImageIO;
+//import javax.swing.*;
+//import javax.swing.filechooser.FileFilter;
+//import javax.swing.filechooser.FileNameExtensionFilter;
+//import java.awt.*;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
+//import java.awt.image.BufferedImage;
+//import java.io.File;
+//import java.io.IOException;
+//import java.util.ArrayList;
+//
+///**
+// * Created by Yiangos , Arnav
+// */
+//
+////TODO list by Yiangos 1) check whether user can select multiple files of images simultaneously
+////                     2) default directory to be set in trunk/resources
+//
+//public class LoadingImages extends JFrame {
+//
+//    private JTextField filename = new JTextField(), dir = new JTextField();
+//    private JButton load = new JButton("Load"), save = new JButton("Save");
+//    public ArrayList<BufferedImage> images = new ArrayList<>();
+//
+//    public LoadingImages() {
+//        JPanel p = new JPanel();
+//        load.addActionListener(new LoadImage());
+//        p.add(load);
+//        save.addActionListener(new SaveImage());
+//        p.add(save);
+//        Container cp = getContentPane();
+//        cp.add(p, BorderLayout.SOUTH);
+//        dir.setEditable(false);
+//        filename.setEditable(false);
+//        p = new JPanel();
+//        p.setLayout(new GridLayout(2, 1));
+//        p.add(filename);
+//        p.add(dir);
+//        cp.add(p, BorderLayout.NORTH);
+//    }
+//
+//    class LoadImage implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//
+//            JFileChooser c = new JFileChooser(".");
+//            c.setMultiSelectionEnabled(true); //allow multiple files
+//            c.showOpenDialog(LoadingImages.this);
+//            //retrieve files selected by the user
+//            File[] files = c.getSelectedFiles(); //get files loaded
+//            for (File f : files) {
+//                BufferedImage image = null;
+//                try {
+//                    image = ImageIO.read(f);
+//                } catch (IOException ioException) {
+//                    ioException.printStackTrace();
+//                }
+//                images.add(image);  //save images in list
+//            }
+//            FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes()); //get all image file filters
+//            c.setFileFilter(imageFilter); //setting file filter
+//            // Demonstrate "Open" dialog:
+//            int rVal = c.showOpenDialog(LoadingImages.this);
+//            if (rVal == JFileChooser.APPROVE_OPTION) { //user approves
+//                filename.setText(c.getSelectedFile().getName());
+//                dir.setText(c.getCurrentDirectory().toString());
+//            }
+//            if (rVal == JFileChooser.CANCEL_OPTION) { //user cancels
+//                filename.setText("User has cancelled.");
+//                dir.setText("Default Directory");
+//            }
+//        }
+//    }
+//
+//    class SaveImage implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            JFileChooser c = new JFileChooser("."); //default directory
+//            // Demonstrate "Save" dialog:
+//            int rVal = c.showSaveDialog(LoadingImages.this);
+//            if (rVal == JFileChooser.APPROVE_OPTION) { //user approves
+//                filename.setText(c.getSelectedFile().getName());
+//                dir.setText(c.getCurrentDirectory().toString());
+//                c.setFileFilter(new FileNameExtensionFilter("*.png", "png"));
+//                if (c.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+//                    File file = c.getSelectedFile();
+//                    try {
+//                        ImageIO.write((BufferedImage) images.get(0), "png", new File(file.getAbsolutePath()));
+//                    } catch (IOException ex) {
+//                        System.out.println("Failed to save image!");
+//                    }
+//                } else {
+//                    System.out.println("No file choosen!");
+//                }
+//            }
+//            if (rVal == JFileChooser.CANCEL_OPTION) { //use cancels
+//                filename.setText("User has cancelled");
+//                dir.setText("Default Directory");
+//            }
+//        }
+//    }
+//
+//    public static void main(String[] args) {
+//        run(new LoadingImages(), 500, 500);
+//    }
+//
+//    public static void run(JFrame frame, int width, int height) {
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(width, height);
+//        frame.setVisible(true);
+//    }
+//
+//}

@@ -1,0 +1,30 @@
+package group9.HomepageWindow;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class CopyrightsPanel extends JPanel {
+
+    private Image image;
+
+    public CopyrightsPanel() {
+        setLayout(new BorderLayout());
+        String copyrights = "ALL COPYRIGHTS RESERVED © - GROUP 09";
+        Label textarea = new Label("\u00a9");
+        textarea.setFont(new Font("Serif", Font.BOLD, 12));
+        textarea.setText(copyrights);
+        textarea.setBackground(Color.white);
+        this.add(textarea, BorderLayout.PAGE_END);
+        setBackground(Color.GRAY);
+    }
+
+    public void setBackground(Image image) {
+        this.image = image;
+    }
+
+    @Override
+    public void paintComponent(Graphics G) {
+        super.paintComponent(G);
+        G.drawImage(image, 0, 0, this.getWidth(), this.getHeight() - 100, null);
+    }
+}

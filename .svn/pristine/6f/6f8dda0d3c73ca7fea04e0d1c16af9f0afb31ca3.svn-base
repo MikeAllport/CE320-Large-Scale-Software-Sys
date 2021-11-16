@@ -1,0 +1,136 @@
+package group9.homepage_window;
+
+import group9.button_handling.HelpButtonHandler;
+import javax.swing.*;
+import java.awt.*;
+
+public class MenuBar extends JMenuBar {
+    JMenu file, edit, options, view, window, help;
+    JMenuItem newCollage, closeApp, recent,
+            selectAll, cut, copy, paste,
+            fullScreen, minimize, zoom,
+            instructions, contactSupport;
+
+    public MenuBar() {
+        initializeMenus();
+        initializeMenuItems();
+        initializeMenuListener();
+
+        this.add(file);
+        this.add(options);
+        this.add(view);
+        this.add(help);
+        this.add(window);
+    }
+
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Menu and MenuItem Example");
+        MenuBar m = new MenuBar();
+        f.setJMenuBar(m);
+        f.setSize(400, 400);
+        f.setLayout(null);
+        f.setVisible(true);
+    }
+
+    private void initializeMenus() {
+        this.file = new JMenu("File");
+        this.edit = new JMenu("Edit");
+        this.options = new JMenu("Options");
+        this.view = new JMenu("View");
+        this.window = new JMenu("Window");
+        this.help = new JMenu("Help");
+    }
+
+    private void initializeMenuItems() {
+
+        // Items under header 'File'
+        this.newCollage = new JMenuItem("New");
+        this.closeApp = new CustomJMenuItem("Close");
+        this.recent = new JMenuItem("Open Recent");
+        file.add(newCollage);
+        file.add(closeApp);
+        file.add(recent);
+
+        //Items under header 'Options'
+        this.selectAll = new JMenuItem("Select All");
+        options.add(selectAll);
+        options.addSeparator();
+        options.add(edit);
+
+        // Items under header 'Edit'
+        this.cut = new JMenuItem("Cut");
+        this.copy = new JMenuItem("Copy");
+        this.paste = new JMenuItem("Paste");
+        edit.add(cut);
+        edit.add(copy);
+        edit.add(paste);
+
+        //Items under header 'View'
+        this.fullScreen = new CustomJMenuItem("Full Screen");
+        view.add(fullScreen);
+
+        //Items under header 'Window'
+        this.minimize = new CustomJMenuItem("Minimize");
+        this.zoom = new JMenuItem("Zoom");
+        window.add(minimize);
+        window.add(zoom);
+
+
+        //Items under header 'Help'
+        this.instructions = new CustomJMenuItem("Getting Started");
+        this.contactSupport = new JMenuItem("Contact Support...");
+        help.add(instructions);
+        help.add(contactSupport);
+    }
+
+    private void initializeMenuListener() {
+        this.closeApp.addActionListener(e -> {
+            System.exit(0);
+        });
+    }
+}
+
+class CustomJMenuItem extends JMenuItem {
+    public CustomJMenuItem(String text) {
+        super(text);
+
+        switch (text.toLowerCase()) {
+            case "close":
+                addActionListener(e -> {
+                    System.exit(0);
+                });
+                break;
+            case "minimize":
+                addActionListener(e -> {
+                    //Using the type JPopupMenu instead of JMenu
+                    //because JPopupMenu has a method getInvoker()
+                    //which is used to get its parent frame
+                    JPopupMenu popupMenu = (JPopupMenu) getParent();
+                    Component invoker = popupMenu.getInvoker();
+                    JComponent invokerAsJComponent = (JComponent) invoker;
+                    Container parentFrame = invokerAsJComponent.getTopLevelAncestor();
+                    ((JFrame) parentFrame).setExtendedState(JFrame.ICONIFIED);
+                });
+                break;
+            case "full screen":
+                addActionListener(e -> {
+                    //Using the type JPopupMenu instead of JMenu
+                    //because JPopupMenu has a method getInvoker()
+                    //which is used to get its parent frame
+                    JPopupMenu popupMenu = (JPopupMenu) getParent();
+                    Component invoker = popupMenu.getInvoker();
+                    JComponent invokerAsJComponent = (JComponent) invoker;
+                    Container parentFrame = invokerAsJComponent.getTopLevelAncestor();
+                    ((JFrame) parentFrame).setExtendedState(JFrame.MAXIMIZED_BOTH);
+                });
+                break;
+            case "getting started":
+                addActionListener(e -> {
+                    new HelpButtonHandler().actionPerformed(e);
+                });
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + text.toLowerCase());
+        }
+    }
+}

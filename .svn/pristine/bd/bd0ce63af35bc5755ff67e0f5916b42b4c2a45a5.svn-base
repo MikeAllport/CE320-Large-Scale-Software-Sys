@@ -1,0 +1,51 @@
+package group9.homepage_window;
+
+import group9.CollageMakerApplication;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class HelpWindow extends JFrame implements ActionListener {
+    private final CollageMakerApplication theApp;
+
+    public HelpWindow(CollageMakerApplication app) {
+        this.theApp = app;
+        setLayout(new BorderLayout());
+        this.setVisible(true);
+        this.setSize(500,500);
+        this.setResizable(false);
+        ImageIcon titleIcon = new ImageIcon("trunk\\resources\\icons\\help_icon_button.png");
+        this.setIconImage(titleIcon.getImage());
+
+        JTextArea helpInstructions = new JTextArea();
+
+        String helpText;
+        if (CollageMakerApplication.getCurrentScreen().equals("homepage")) {
+            helpText =
+                    " Homepage: Simply load images into the application using the load button in " +
+                            "top left. Any images you load can viewed on the screen, you can choose them from the list on the left.\nClick the Delete button in the top " +
+                            "left to remove any image you've selected.\nWhen you're ready to generate the collage, click the " +
+                            "Generate button at the bottom";
+        } else {
+            helpText = "Collage Page: You can cycle through collages using the back and next buttons. If you " +
+                    "like the generated collage, click the Save button to save it to your desktop. " +
+                    "If you don't like it, click the Delete button to discard the collage. Alternatively, " +
+                    "click the Home button to return to the previous screen";
+        }
+        helpInstructions.setText(helpText);
+        helpInstructions.setLineWrap(true);
+        helpInstructions.setVisible(true);
+        helpInstructions.setEditable(false);
+        this.add(helpInstructions, BorderLayout.CENTER);
+        JButton closeBT = new JButton("Close");
+        closeBT.addActionListener(this);
+        this.add(closeBT, BorderLayout.PAGE_END);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.dispose();
+    }
+}
