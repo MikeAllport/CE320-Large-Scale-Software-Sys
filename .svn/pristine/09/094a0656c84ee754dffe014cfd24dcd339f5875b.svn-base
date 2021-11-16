@@ -1,7 +1,0 @@
-package group9.RandomCollageGenerator;
-
-import java.awt.image.BufferedImage;
-
-public interface ICollageGenerator {
-    BufferedImage getCollage();
-}

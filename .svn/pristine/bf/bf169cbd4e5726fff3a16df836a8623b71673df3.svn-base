@@ -1,7 +1,0 @@
-package testing;
-
-import static org.junit.Assert.*;
-import org.junit.*;
-
-public class Bank2_Lab6_09NOV20_JUnit_Testing {
-}
